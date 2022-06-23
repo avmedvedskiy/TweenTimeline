@@ -1,0 +1,17 @@
+{
+    "name": "TweenTimeline",
+    "rootNamespace": "",
+    "references": [
+        "DOTweenPro.EditorScripts",
+        "ManagedReference.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
