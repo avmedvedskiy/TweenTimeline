@@ -38,7 +38,6 @@ namespace Timeline.Move
         {
             if (Has(item))
             {
-                var list = _cachedItems[item];
                 foreach (var cachedProp in _cachedItems[item])
                 {
                     cachedProp.Item1.SetValue(item,cachedProp.Item2);
