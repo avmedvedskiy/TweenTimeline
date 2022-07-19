@@ -50,6 +50,7 @@ namespace Timeline.Move
         // Called each frame while the state is set to Play
         public override void PrepareFrame(Playable playable, FrameData info)
         {
+            base.PrepareFrame(playable,info);
 #if UNITY_EDITOR
             if (Application.isPlaying)
                 return;

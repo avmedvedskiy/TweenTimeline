@@ -40,7 +40,6 @@ namespace Timeline.Move
                 SaveDefaultState();
         }
 
-
         private void SaveDefaultState()
         {
             //save component

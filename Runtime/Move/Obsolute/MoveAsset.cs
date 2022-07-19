@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.Playables;
 
 namespace Timeline.Move
 {
-    [System.Serializable]
+    [Serializable]
     public class MoveAsset : PlayableAsset
     {
         [SerializeField] private MoveBehaviour _runnerBehaviour;
