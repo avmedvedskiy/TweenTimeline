@@ -23,7 +23,7 @@ namespace Timeline.Move
             Target ??= go.transform;
         }
 
-        protected override Tweener GenerateTween(float duration)
+        protected override Tween GenerateTween(float duration)
         {
             if (_endTransform == null)
                 return null;

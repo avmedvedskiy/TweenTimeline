@@ -10,7 +10,7 @@ namespace Timeline.Move
 {
     public abstract class TweenRunnerBehaviour<T> : PlayableBehaviourTarget<T> where T : Component
     {
-        private Tweener _tweener;
+        private Tween _tweener;
 
         public override void OnGraphStop(Playable playable)
         {
@@ -61,6 +61,6 @@ namespace Timeline.Move
 #endif
         }
 
-        protected abstract Tweener GenerateTween(float duration);
+        protected abstract Tween GenerateTween(float duration);
     }
 }
