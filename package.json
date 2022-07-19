@@ -1,10 +1,10 @@
 {
   "name": "com.avmedvedskiy.tweentimeline",
   "displayName": "TweenTimeline",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "unity": "2021.3",
   "author": "avmedvedskiy",
-  "description": "Tween Extentions for Timeline",
+  "description": "Tween Extensions for Timeline",
   "keywords": [
   ]
 }
