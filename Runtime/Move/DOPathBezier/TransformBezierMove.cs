@@ -10,7 +10,7 @@ using UnityEngine.Playables;
 namespace Timeline.Move.Bezier
 {
     [Serializable]
-    public class TransformBezierMoveBehaviour : TweenRunnerBehaviour<Transform>, ISceneViewHandler
+    public class TransformBezierMove : TweenRunner<Transform>, ISceneViewHandler
     {
         [SerializeField] private ExposedReference<Transform> _endTransformReference = new() { exposedName = "End" };
 
@@ -23,11 +23,15 @@ namespace Timeline.Move.Bezier
         private Vector3 _initialPosition;
 
 
-        public override void Resolve(PlayableGraph graph, GameObject go)
+        public override void Resolve(PlayableGraph graph, GameObject go, UnityEngine.Object target)
         {
-            base.Resolve(graph, go);
+            base.Resolve(graph, go, target);
             _endTransform = _endTransformReference.Resolve(graph.GetResolver());
-            Target ??= go.transform;
+        }
+
+        protected override void OnSetTarget()
+        {
+            base.OnSetTarget();
             _initialPosition = Target.position;
         }
 
@@ -40,7 +44,7 @@ namespace Timeline.Move.Bezier
                 .DOPath(
                     new[]
                     {
-                        _endTransform.position, 
+                        _endTransform.position,
                         Target.TransformPoint(startTangent),
                         _endTransform.TransformPoint(endTangent)
                     },
@@ -51,6 +55,9 @@ namespace Timeline.Move.Bezier
         public void OnSceneGUI()
         {
 #if UNITY_EDITOR
+            if(_endTransform == null)
+                return;
+            
             _endTransform.position = Handles.PositionHandle(_endTransform.position, _endTransform.rotation);
 
             startTangent =

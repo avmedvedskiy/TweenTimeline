@@ -7,19 +7,13 @@ using UnityEngine.Playables;
 namespace Timeline.Move.Bezier
 {
     [Serializable]
-    public class ScaleAnimateBehaviour : TweenRunnerBehaviour<Transform>
+    public class ScaleAnimate : TweenRunner<Transform>
     {
         [Tooltip("if negative value - will be used current")] [SerializeField]
         private float _fromValue = -1f;
 
         [SerializeField] private float _value;
         [SerializeField] private Easing _easing;
-
-        public override void Resolve(PlayableGraph graph, GameObject go)
-        {
-            base.Resolve(graph, go);
-            Target ??= go.transform;
-        }
 
         protected override Tween GenerateTween(float duration)
         {

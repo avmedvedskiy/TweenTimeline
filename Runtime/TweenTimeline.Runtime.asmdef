@@ -2,7 +2,8 @@
     "name": "TweenTimeline.Runtime",
     "rootNamespace": "",
     "references": [
-        "DOTweenPro.EditorScripts"
+        "DOTweenPro.EditorScripts",
+        "Unity.Timeline"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

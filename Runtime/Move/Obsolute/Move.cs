@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 namespace Timeline.Move
 {
     [Serializable]
-    public class MoveBehaviour : TweenRunnerBehaviour<Transform>
+    public class Move : TweenRunner<Transform>
     {
         [SerializeField] private ExposedReference<Transform> _endTransformReference = new(){exposedName = "End"};
 
@@ -16,11 +16,11 @@ namespace Timeline.Move
 
         private Transform _endTransform;
 
-        public override void Resolve(PlayableGraph graph, GameObject go)
+        public override void Resolve(PlayableGraph graph, GameObject owner, UnityEngine.Object trackTarget)
         {
-            base.Resolve(graph,go);
+            base.Resolve(graph,owner,trackTarget);
             _endTransform = _endTransformReference.Resolve(graph.GetResolver());
-            Target ??= go.transform;
+            Target ??= owner.transform;
         }
 
         protected override Tween GenerateTween(float duration)

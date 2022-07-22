@@ -3,7 +3,7 @@ using System;
 namespace Timeline.Move
 {
     [Serializable]
-    public class MoveAsset : BasePlayableAsset<MoveBehaviour>
+    public class MoveAsset : BasePlayableAsset<Move>
     {
     }
 }

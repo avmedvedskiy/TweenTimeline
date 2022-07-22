@@ -5,17 +5,31 @@ using UnityEngine.Playables;
 namespace Timeline.Move
 {
     [Serializable]
-    public abstract class PlayableBehaviourTarget<T> : PlayableBehaviour,IResolveBehaviour where T : Component
+    public abstract class PlayableTarget<T> : PlayableBehaviour, IResolve where T : Component
     {
-        [SerializeField] private ExposedReference<T> _target;
         protected T Target { get; set; }
 
-
-        public virtual void Resolve(PlayableGraph graph, GameObject go)
+        public virtual void Resolve(PlayableGraph graph, GameObject go, UnityEngine.Object trackTarget)
         {
-            Target = _target.Resolve(graph.GetResolver());
+            Target = trackTarget as T;
         }
 
+        protected virtual void OnSetTarget()
+        {
+        }
+
+        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+        {
+            base.ProcessFrame(playable, info, playerData);
+            if (Target != (T)playerData)
+            {
+                Target = (T)playerData;
+                if (Target != null)
+                {
+                    OnSetTarget();
+                }
+            }
+        }
 
         //this methods only for previwing in editor mode
 #if UNITY_EDITOR

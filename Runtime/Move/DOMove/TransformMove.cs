@@ -10,7 +10,7 @@ using UnityEditor;
 namespace Timeline.Move
 {
     [Serializable]
-    public class TransformMoveBehaviour : TweenRunnerBehaviour<Transform>, ISceneViewHandler
+    public class TransformMove : TweenRunner<Transform>, ISceneViewHandler
     {
         [SerializeField] private ExposedReference<Transform> _endTransformReference = new() { exposedName = "End" };
 
@@ -19,11 +19,10 @@ namespace Timeline.Move
 
         private Transform _endTransform;
 
-        public override void Resolve(PlayableGraph graph, GameObject go)
+        public override void Resolve(PlayableGraph graph, GameObject go, UnityEngine.Object trackTarget)
         {
-            base.Resolve(graph, go);
+            base.Resolve(graph, go, trackTarget);
             _endTransform = _endTransformReference.Resolve(graph.GetResolver());
-            Target ??= go.transform;
         }
 
         protected override Tween GenerateTween(float duration)

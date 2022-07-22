@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Timeline.Move
 {
-    public abstract class TweenRunnerBehaviour<T> : PlayableBehaviourTarget<T> where T : Component
+    public abstract class TweenRunner<T> : PlayableTarget<T> where T : Component
     {
         private Tween _tweener;
 
@@ -22,7 +22,10 @@ namespace Timeline.Move
         public override void OnBehaviourPlay(Playable playable, FrameData info)
         {
             base.OnBehaviourPlay(playable,info);
-        
+            
+            if(Target == null)
+                return;
+
             float duration = (float)playable.GetDuration();
             _tweener ??= GenerateTween(duration);
             _tweener.Restart();
@@ -47,10 +50,9 @@ namespace Timeline.Move
 #endif
         }
 
-        // Called each frame while the state is set to Play
-        public override void PrepareFrame(Playable playable, FrameData info)
+        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
-            base.PrepareFrame(playable,info);
+            base.ProcessFrame(playable, info, playerData);
 #if UNITY_EDITOR
             if (Application.isPlaying)
                 return;
