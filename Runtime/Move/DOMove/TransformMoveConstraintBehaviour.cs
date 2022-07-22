@@ -1,14 +1,16 @@
 using System;
-using System.Collections.Generic;
 using DG.Tweening;
 using TweenExtension;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Playables;
 
 namespace Timeline.Move
 {
     [Serializable]
-    public class TransformMoveConstraintBehaviour : TweenRunnerBehaviour<Transform>
+    public class TransformMoveConstraintBehaviour : TweenRunnerBehaviour<Transform>, ISceneViewHandler
     {
         [SerializeField] private ExposedReference<Transform> _endTransformReference = new() { exposedName = "End" };
 
@@ -43,6 +45,16 @@ namespace Timeline.Move
                     .DOMoveZ(position.z, duration)
                     .SetEase(_z));
             return sequence;
+        }
+
+        public void OnSceneGUI()
+        {
+#if UNITY_EDITOR
+            if (_endTransform != null && Target != null)
+            {
+                Handles.DrawLine(Target.position,_endTransform.position);
+            }
+#endif
         }
     }
 }

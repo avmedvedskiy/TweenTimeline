@@ -5,7 +5,7 @@ using UnityEngine.Playables;
 namespace Timeline.Move
 {
     [Serializable]
-    public abstract class PlayableBehaviourTarget<T> : PlayableBehaviour where T : Component
+    public abstract class PlayableBehaviourTarget<T> : PlayableBehaviour,IResolveBehaviour where T : Component
     {
         [SerializeField] private ExposedReference<T> _target;
         protected T Target { get; set; }
