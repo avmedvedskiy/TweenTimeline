@@ -27,11 +27,6 @@ namespace Timeline.Move.Bezier
         {
             base.Resolve(graph, go, target);
             _endTransform = _endTransformReference.Resolve(graph.GetResolver());
-        }
-
-        protected override void OnSetTarget()
-        {
-            base.OnSetTarget();
             _initialPosition = Target.position;
         }
 

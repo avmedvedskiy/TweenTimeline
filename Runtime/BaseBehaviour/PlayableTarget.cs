@@ -14,23 +14,6 @@ namespace Timeline.Move
             Target = trackTarget as T;
         }
 
-        protected virtual void OnSetTarget()
-        {
-        }
-
-        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
-        {
-            base.ProcessFrame(playable, info, playerData);
-            if (Target != (T)playerData)
-            {
-                Target = (T)playerData;
-                if (Target != null)
-                {
-                    OnSetTarget();
-                }
-            }
-        }
-
         //this methods only for previwing in editor mode
 #if UNITY_EDITOR
         [NonSerialized] private bool _isInit;
