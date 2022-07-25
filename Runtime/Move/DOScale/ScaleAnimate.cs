@@ -1,10 +1,11 @@
 using System;
 using DG.Tweening;
+using Timeline.Move;
 using TweenExtension;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace Timeline.Move.Bezier
+namespace Timeline.Scale
 {
     [Serializable]
     public class ScaleAnimate : TweenRunner<Transform>
