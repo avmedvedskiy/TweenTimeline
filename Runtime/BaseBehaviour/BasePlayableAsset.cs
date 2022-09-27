@@ -13,7 +13,10 @@ namespace Timeline.Move
     {
         [NoFoldOut] [SerializeField] private T _runnerBehaviour;
 
-        protected T Behaviour => _runnerBehaviour;
+
+        [NonSerialized] private PlayableGraph _graph;
+        [NonSerialized] private GameObject _owner;
+        [NonSerialized] private UnityEngine.Object _trackTarget;
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
@@ -21,7 +24,13 @@ namespace Timeline.Move
             SceneView.duringSceneGui -= OnSceneGUI;
             SceneView.duringSceneGui += OnSceneGUI;
 #endif
-            return ScriptPlayable<T>.Create(graph, _runnerBehaviour);
+            var playable = ScriptPlayable<T>.Create(graph, _runnerBehaviour);
+            if (playable.GetBehaviour() is IResolve resolve)
+            {
+                resolve.Resolve(_graph, _owner, _trackTarget);
+            }
+
+            return playable;
         }
 
 #if UNITY_EDITOR
@@ -40,8 +49,9 @@ namespace Timeline.Move
 #endif
         public void Resolve(PlayableGraph graph, GameObject owner, UnityEngine.Object trackTarget)
         {
-            if (_runnerBehaviour is IResolve resolveBehaviour)
-                resolveBehaviour.Resolve(graph, owner, trackTarget);
+            _graph = graph;
+            _owner = owner;
+            _trackTarget = trackTarget;
         }
     }
 }
