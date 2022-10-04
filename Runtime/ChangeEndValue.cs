@@ -1,29 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
 public class ChangeEndValue : MonoBehaviour
 {
-    public PlayableDirector director;
-    public Transform endValue;
-    public string endRefName;
+    [SerializeField] private PlayableDirector[] _directors;
+    [SerializeField] private Transform _endValue;
+    [SerializeField] private string _endRefName;
 
     public void OnEnable()
     {
-        //director.stopped += _ => Debug.Log("stopped");
         ChangeValue();
     }
 
     [ContextMenu(nameof(ChangeValue))]
     public void ChangeValue()
     {
-        director.SetReferenceValue(new PropertyName(endRefName), endValue);
-        director.Play();
+        foreach (var director in _directors)
+        {
+            director.SetReferenceValue(new PropertyName(_endRefName), _endValue);
+        }
     }
 
-    public void OnFlyComplete()
+    private void OnValidate()
     {
-        Debug.Log("Done");
+        _directors = GetComponentsInChildren<PlayableDirector>();
     }
 }
