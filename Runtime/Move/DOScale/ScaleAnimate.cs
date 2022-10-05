@@ -3,7 +3,6 @@ using DG.Tweening;
 using Timeline.Move;
 using TweenExtension;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace Timeline.Scale
 {
