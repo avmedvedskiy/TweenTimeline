@@ -21,7 +21,8 @@ namespace Timeline.SetPosition
         public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
             base.ProcessFrame(playable, info, playerData);
-            Target.transform.position = _endTransform.position;
+            if(Target != null && _endTransform != null)
+                Target.position = _endTransform.position;
         }
     }
 }
