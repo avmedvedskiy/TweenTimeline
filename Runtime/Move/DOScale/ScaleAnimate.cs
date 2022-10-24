@@ -13,15 +13,17 @@ namespace Timeline.Scale
         private float _fromValue = -1f;
 
         [SerializeField] private float _value;
+        [SerializeField] private bool _relative;
         [SerializeField] private Easing _easing;
 
         protected override Tween GenerateTween(float duration)
         {
+            Vector3 finishScale = _relative ? Target.localScale * _value : Vector3.one * _value;
+
             if (_fromValue >= 0f)
                 Target.localScale = Vector3.one * _fromValue;
-
             return Target
-                .DOScale(_value, duration)
+                .DOScale(finishScale, duration)
                 .SetEase(_easing);
         }
     }
