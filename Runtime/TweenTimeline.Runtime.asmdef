@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "DOTweenPro.EditorScripts",
-        "Unity.Timeline"
+        "Unity.Timeline",
+        "DOTween.Modules"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

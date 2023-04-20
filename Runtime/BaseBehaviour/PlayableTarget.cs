@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Playables;
+using Transform = UnityEngine.Transform;
 
 namespace Timeline.Move
 {
@@ -11,7 +12,14 @@ namespace Timeline.Move
 
         public virtual void Resolve(PlayableGraph graph, GameObject go, UnityEngine.Object trackTarget)
         {
-            Target = trackTarget as T;
+            if (trackTarget is T t)
+            {
+                Target = t;
+            }
+            else
+            {
+                Target = (trackTarget as Component)?.GetComponent<T>();
+            }
         }
 
         //this methods only for previwing in editor mode
